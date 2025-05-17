@@ -36,9 +36,6 @@ def get_weather(city: str) -> str:
     }
     return forecast.get(city, forecast.get('Default'))
 
-def tool_generate(state: MessagesState):
-    return {"messages": [model.invoke(state['messages'])]} 
-
 
 if __name__ == "__main__":
     # Step 1: Model and tool
@@ -51,7 +48,6 @@ if __name__ == "__main__":
     graph_builder = StateGraph(MessagesState)
     graph_builder.add_node("chatbot", chatbot)
     graph_builder.add_node("tools", ToolNode([get_weather]))
-    graph_builder.add_node("tool_generate", tool_generate)
     
     graph_builder.add_edge(START, "chatbot")
     graph_builder.add_conditional_edges(
@@ -62,8 +58,7 @@ if __name__ == "__main__":
             END: END
         }
     )
-    graph_builder.add_edge("tools", "tool_generate")
-    graph_builder.add_edge("tool_generate", END)
+    graph_builder.add_edge("tools", "chatbot")
     graph = graph_builder.compile()
 
     # Step 3: Invocation
