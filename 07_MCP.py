@@ -14,7 +14,7 @@ async def main():
             "transport": "stdio"
         },
         "weather":{
-            "url": "https:localhost:8080/mcp",
+            "url": "http://localhost:8000/mcp",
             "transport": "streamable_http"
         }
     })
