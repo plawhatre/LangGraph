@@ -12,3 +12,4 @@ python3 -m pip install rank_bm25
 python3 -m pip install langgraph>0.2.27
 python3 -m pip install bs4
 python3 -m pip install pretty_errors
+python3 -m pip install langchain-mcp-adapters
