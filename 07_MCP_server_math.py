@@ -13,5 +13,7 @@ def multiply(a: float, b: float) -> float:
     "Multiply the given two numbers"
     return a*b
 
-if __name__ == "__main":
+if __name__ == "__main__":
+    print("Starting MCP Math Server.")
     mcp.run(transport="stdio")
+    print("MCP Math Server started.")
