@@ -37,5 +37,5 @@ async def get_weather(city: str) -> str:
 
 if __name__ == "__main__":
     print("Starting MCP weather Server.")
-    mcp.run(transport="streamble_http")
+    mcp.run(transport="streamable_http")
     print("MCP Weather Server started")
