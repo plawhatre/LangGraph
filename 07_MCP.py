@@ -39,7 +39,7 @@ async def main():
         }
     )
     print(f"Query: {math_query}")
-    print(f"Result: {math_result}")
+    math_result["messages"][-1].pretty_print()
 
     weather_query = "What is the present weather condition in Mumbai?"
     weather_result = await agent.ainvoke(
@@ -51,7 +51,7 @@ async def main():
         }
     )
     print(f"Query: {weather_query}")
-    print(f"Result: {weather_result}")
+    weather_result["messages"][-1].pretty_print()
 
 
 
