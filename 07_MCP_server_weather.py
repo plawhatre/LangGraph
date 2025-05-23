@@ -30,7 +30,10 @@ async def get_weather(city: str) -> str:
 
         }
     }
-    return forecast.get(city, forecast.get('Default'))
+    city_forecast = forecast.get(city, forecast.get('Default'))
+    return f"The weather in {city} is {city_forecast['Temperature']} {city_forecast['Outlook']}."
+
+
 
 if __name__ == "__main__":
-    mcp.run(transport="streamble-http")
+    mcp.run(transport="streamble_http")
