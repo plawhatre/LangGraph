@@ -3,7 +3,7 @@ from mcp.server.fastmcp import FastMCP
 
 mcp =FastMCP("Weather")
 
-@mcp.tool
+@mcp.tool()
 async def get_weather(city: str) -> str:
     """This tool return the weather condition of the city for which query is made"""
     city = city.capitalize()
