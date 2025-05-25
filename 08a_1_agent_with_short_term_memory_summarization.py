@@ -37,10 +37,10 @@ if __name__ == "__main__":
         token_counter=count_tokens_approximately,
         max_tokens=380,
         max_summary_tokens=120,
-        output_messages_key="llm_inp_messagees"
+        output_messages_key="llm_inp_messages"
     )
 
-    # Stage 3: Agent
+    # Stage 5: Agent
     agent = create_react_agent(
         model=model,
         tools=tools,
@@ -49,7 +49,7 @@ if __name__ == "__main__":
         pre_model_hook=summarization_node
     )
 
-    # Stage 4: Invoke
+    # Stage 6: Invoke
     config = {"configurable": {"thread_id": uuid.uuid4()}}
     messages = [{
         "role": "user",

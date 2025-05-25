@@ -21,14 +21,14 @@ if __name__ == "__main__":
     # Stage 3: Short Term Memory
     memory = InMemorySaver()
 
-    # Stage 3: Agent
+    # Stage 4: Agent
     agent = create_react_agent(
         model=model,
         tools=tools,
         checkpointer=memory
     )
 
-    # Stage 4: Invoke
+    # Stage 5: Invoke
     config = {"configurable": {"thread_id": uuid.uuid4()}}
     messages = [{
         "role": "user",
