@@ -26,10 +26,6 @@ if __name__ == "__main__":
     )
 
     # Step 3: Agent
-    prompt="""If ask about user information, 
-            get it from the InMemoryStore using 
-            tool calling get_user_info
-        """
     agent = create_react_agent(
         model=model,
         tools=[get_user_info],
