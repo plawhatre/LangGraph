@@ -3,6 +3,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langgraph.store.memory import InMemoryStore
 from langgraph.prebuilt import create_react_agent
 from langgraph.config import get_store
+from langchain_core.runnables import RunnableConfig
 
 store = InMemoryStore()
 
@@ -10,9 +11,9 @@ class UserInfo(TypedDict):
     name: str
     language: str
 
-def save_user_info(user_info: UserInfo) -> str:
+def save_user_info(user_info: UserInfo, config:RunnableConfig) -> str:
     """Saves user info into LTM"""
-    usr_key = input("Enter the Key for Long Term Memory:\n\t")
+    usr_key = config["configurable"]["usr_key"]
     store = get_store()
     values = store.put(("users_namespace",), usr_key, user_info)
     return "Successfully saved the values in Long-Term Memory"
@@ -29,7 +30,7 @@ if __name__ == "__main__":
     )
 
     # Step 3: Invoke
-    config = {"configurable": {"thread_id": "123abc"}}
+    config = {"configurable": {"thread_id": "123abc", "usr_key": "user_123"}}
     messages = [{
         "role": "user",
         "content": "My name is Phantom and I speak gibberish language"
