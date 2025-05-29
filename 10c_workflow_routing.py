@@ -108,6 +108,6 @@ if __name__ == "__main__":
     # print(chain.get_graph().draw_ascii())
 
     # # Step 3: Invoke
-    state = chain.invoke({"topic": "Write a joke on dogs for me"})
+    state = chain.invoke({"inp": "Write a joke on dogs for me"})
 
     print(state)
