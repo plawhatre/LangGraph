@@ -6,6 +6,7 @@ from langchain_core.messages import ToolMessage, HumanMessage
 from langgraph.prebuilt.chat_agent_executor import AgentState
 from langgraph.prebuilt import create_react_agent, InjectedState
 from langgraph.types import Command
+from langchain_core.runnables import RunnableConfig
 
 
 class CustomState(AgentState):
@@ -13,14 +14,12 @@ class CustomState(AgentState):
 
 def get_user_info(
         tool_call_id: Annotated[str, InjectedToolCallId],
+        config: RunnableConfig,
         user_name: Optional[str]
 ) -> Command:
     """Get the user name if the HummanMessage or CustomState doesn't have it."""
     #Google models can't access config. So, using input to access the name directly
-    if user_name == "":
-        user_name = input(
-            f"Sorry, could you please provide you name?"
-        )
+    if user_name == "": user_name = config["configurable"]["user_name"]
     return Command(
         goto="greet",
         update={
@@ -67,7 +66,7 @@ if __name__ == "__main__":
 
     print("-.-"*30)
 
-    config= {"configurable": {"thread_id": "123xyz"}}
+    config= {"configurable": {"thread_id": "123xyz", "user_name": "Prashant"}}
     msgs = [HumanMessage("Hi there")]
     resp = agent.invoke({"messages": msgs}, config=config)
     resp['messages'][-1].pretty_print()
