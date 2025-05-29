@@ -65,7 +65,7 @@ def router_classification(state: State):
         }
     ]
     resp = llm_with_struct_out.invoke(msgs)
-    return {"decision": resp.content}
+    return {"decision": resp.route}
 
 def router_decision(state: State):
     if state["decision"] == "joke":
@@ -75,7 +75,7 @@ def router_decision(state: State):
     elif state["decision"] == "poem":
         return "write_poem"
     else:
-        raise Exception("Unkown output")
+        raise Exception(f"Unkown output: {state['decision']}")
 
 if __name__ == "__main__":
     # Step 1: Model
