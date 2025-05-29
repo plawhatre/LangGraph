@@ -2,13 +2,15 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langgraph.store.memory import InMemoryStore
 from langgraph.prebuilt import create_react_agent
 from langgraph.config import get_store
+from  langchain_core.runnables import RunnableConfig
 
 
-def get_user_info() -> str:
+def get_user_info(config: RunnableConfig) -> str:
     """Look up user info from LTM"""
-    key = input("Enter the Key for Long Term Memory:\n\t")
+    # key = input("Enter the Key for Long Term Memory:\n\t")
+    key = config["configurable"]["usr_key"]
     store = get_store()
-    values = store.get(("users_namespace",), key)
+    values = store.get(("users_namespace_123",), key)
     return str(values.value) if values else "unkown user"
 
 if __name__ == "__main__":
@@ -18,7 +20,7 @@ if __name__ == "__main__":
     # Step 2: Store
     store = InMemoryStore()
     store.put(
-        ("users_namespace",), "user_key",
+        ("users_namespace_123",), "user_key_123",
         {
             "name": "Prashant",
             "language": "Marathi"
@@ -33,7 +35,7 @@ if __name__ == "__main__":
     )
 
     # Step 4: Invoke
-    config = {"configurable": {"thread_id": "123abc"}}
+    config = {"configurable": {"thread_id": "123abc", "usr_key": "user_key_123"}}
     messages = [{
         "role": "user",
         "content": "Get the user information"
