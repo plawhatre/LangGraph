@@ -70,7 +70,7 @@ def orchestrator(state: State):
             "content": f"Here is the report topic: {state['topic']}"
         }
     ]
-    report_sections = planner.invoke({"messages": messages})
+    report_sections = planner.invoke(messages)
     return {"sections": report_sections.sections}
 
 def assign_workers(state: State):
