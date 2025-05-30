@@ -94,7 +94,7 @@ def llm_calls(state: WorkerState):
         }
     ]
     section = model.invoke(messages)
-    return {"completed_sections": section.content}
+    return {"completed_sections": [section.content]}
 
 def syntheizer(state: State):
     """It synthesizes full report from the sections"""
